@@ -319,6 +319,7 @@ function betacodeToArabic(text) {
     text = text.replace('å' , "ا");
     console.log(3+text);
     text = dictReplace(text, translitArabic);
+    text = text.replace(/ْ(?:(?=[\s.,!?])|$)/g, ""); // replace final sukun
     console.log(4+text);
     return text;
 }
