@@ -187,23 +187,21 @@ function betacodeToArabic(text) {
     // complex combinations
     text = text.replace(/all[āã]h/g, "الله".trim()); // Convert God's Name
     text = text.replace(/li-?ll[āã]hi?/g, "لله".trim()); // Convert God's Name
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)b\./g, "بن"); // Convert b. into ar bn
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)b\./g, "بن"); // Convert b. into ar bn
 
     //var sun = "([tṯdḏrzsšṣḍṭẓln])";
     //var re = new RegExp("\b[aA]l-"+sun, "g");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)[aA]l-([tṯdḏrzsšṣḍṭẓln])/g, 'ﭐل-$1$1'); // converts articles w/ sun letters
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)[aA]l-/g, "ﭐلْ-"); // converts articles
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)wa-a?l-/g, "وَﭐل-"); // converts articles
-
-    text  = text.replace(/,/g, "،"); // Convert commas
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)[aA]l-([tṯdḏrzsšṣḍṭẓln])/g, 'ﭐل-$1$1'); // converts articles w/ sun letters
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)[aA]l-/g, "ﭐلْ-"); // converts articles
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)wa-a?l-/g, "وَﭐل-"); // converts articles
 
     // initial HAMZAs
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?a/g, "أَ");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?i/g, "إِ");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?u/g, "أُ");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ā/g, "آ");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ī/g, "إِي");
-    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ū/g, "أُو");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?a/g, "أَ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?i/g, "إِ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?u/g, "أُ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ā/g, "آ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ī/g, "إِي");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ū/g, "أُو");
 
     text = text.replace(/-|_/g, "");
 
@@ -241,9 +239,9 @@ function betacodeToArabic(text) {
     text = text.replace(/āʾaȵ/g, "اءً");
 
     // long, hamza, diptote
-    text = text.replace(/āʾu(?:(?=[\s.,!?])|$)/g, "اءُ");
-    text = text.replace(/āʾi(?:(?=[\s.,!?])|$)/g, "اءِ");
-    text = text.replace(/āʾa(?:(?=[\s.,!?])|$)/g, "اءَ");
+    text = text.replace(/āʾu(?:(?=[\s.,!?:])|$)/g, "اءُ");
+    text = text.replace(/āʾi(?:(?=[\s.,!?:])|$)/g, "اءِ");
+    text = text.replace(/āʾa(?:(?=[\s.,!?:])|$)/g, "اءَ");
 
     // medial HAMZAs
     text = text.replace(/aʾū/g, "َؤُو");
@@ -316,6 +314,10 @@ function betacodeToArabic(text) {
     text = text.replace(/ů/g, "و");
     text = text.replace(/å/g, "ا");
     text = dictReplace(text, translitArabic);
-    text = text.replace(/ْ(?:(?=[\s.,!?])|$)/g, ""); // replace final sukun
+
+    text = text.replace(/ْ(?:(?=[\s.,!?:])|$)/g, ""); // replace final sukun
+    text = text.replace(/,/g, "،"); // Convert commas
+
+
     return text;
 }
