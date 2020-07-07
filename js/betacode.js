@@ -175,9 +175,9 @@ function betacodeToArabic(text) {
     text = text.replace("ả", "a");
 
     // complex combinations
-    text = text.replace(/all[āã]h/, "الله".trim()); // Convert God's Name
-    text = text.replace(/li-?ll[āã]hi?/, "لله".trim()); // Convert God's Name
-    text = text.replace(/(?:(?<=[\s.,!?])|^)b\./, "بن"); // Convert b. into ar bn
+    text = text.replace(/all[āã]h/g, "الله".trim()); // Convert God's Name
+    text = text.replace(/li-?ll[āã]hi?/g, "لله".trim()); // Convert God's Name
+    text = text.replace(/(?:(?<=[\s.,!?])|^)b\./g, "بن"); // Convert b. into ar bn
 
     //var sun = "([tṯdḏrzsšṣḍṭẓln])";
     //var re = new RegExp("\b[aA]l-"+sun, "g");
@@ -231,9 +231,9 @@ function betacodeToArabic(text) {
     text = text.replace('āʾaȵ', "اءً");
 
     // long, hamza, diptote
-    text = text.replace(/āʾu(?:(?=[\s.,!?])|$)/, "اءُ");
-    text = text.replace(/āʾi(?:(?=[\s.,!?])|$)/, "اءِ");
-    text = text.replace(/āʾa(?:(?=[\s.,!?])|$)/, "اءَ");
+    text = text.replace(/āʾu(?:(?=[\s.,!?])|$)/g, "اءُ");
+    text = text.replace(/āʾi(?:(?=[\s.,!?])|$)/g, "اءِ");
+    text = text.replace(/āʾa(?:(?=[\s.,!?])|$)/g, "اءَ");
 
     // medial HAMZAs
     text = text.replace("aʾū", "َؤُو");
