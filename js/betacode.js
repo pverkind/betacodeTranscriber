@@ -176,69 +176,69 @@ function betacodeToArabic(text) {
     var cnsnnts = cnsnnts + cnsnnts.toUpperCase();
 
     text = dictReplace(text, betacodeTranslit);
-    text = text.replace("+", "");
+    text = text.replace(/\+/g, "");
 
     // fix irrelevant variables for Arabic script
     text = text.toLowerCase();
-    text = text.replace("ủ", "u");
-    text = text.replace("ỉ", "i");
-    text = text.replace("ả", "a");
+    text = text.replace(/ủ/g, "u");
+    text = text.replace(/ỉ/g, "i");
+    text = text.replace(/ả/g, "a");
 
     // complex combinations
     text = text.replace(/all[āã]h/g, "الله".trim()); // Convert God's Name
     text = text.replace(/li-?ll[āã]hi?/g, "لله".trim()); // Convert God's Name
-    text = text.replace(/(?:(?<=[\s.,!?])|^)b\./g, "بن"); // Convert b. into ar bn
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)b\./g, "بن"); // Convert b. into ar bn
 
     //var sun = "([tṯdḏrzsšṣḍṭẓln])";
     //var re = new RegExp("\b[aA]l-"+sun, "g");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)[aA]l-([tṯdḏrzsšṣḍṭẓln])/g, 'ﭐل-$1$1'); // converts articles w/ sun letters
-    text = text.replace(/(?:(?<=[\s.,!?])|^)[aA]l-/g, "ﭐلْ-"); // converts articles
-    text = text.replace(/(?:(?<=[\s.,!?])|^)wa-a?l-/g, "وَﭐل-"); // converts articles
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)[aA]l-([tṯdḏrzsšṣḍṭẓln])/g, 'ﭐل-$1$1'); // converts articles w/ sun letters
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)[aA]l-/g, "ﭐلْ-"); // converts articles
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)wa-a?l-/g, "وَﭐل-"); // converts articles
 
-    text  = text.replace(",", "،"); // Convert commas
+    text  = text.replace(/,/g, "،"); // Convert commas
 
     // initial HAMZAs
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?a/g, "أَ");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?i/g, "إِ");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?u/g, "أُ");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?ā/g, "آ");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?ī/g, "إِي");
-    text = text.replace(/(?:(?<=[\s.,!?])|^)ʾ?ū/g, "أُو");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?a/g, "أَ");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?i/g, "إِ");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?u/g, "أُ");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ā/g, "آ");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ī/g, "إِي");
+    text = text.replace(/(?:(?<=[\s.,!?\-])|^)ʾ?ū/g, "أُو");
 
     text = text.replace(/-|_/g, "");
 
     // final HAMZAs
-    text = text.replace('yʾaȵ', "يْئًا");
+    text = text.replace(/yʾaȵ/g, "يْئًا");
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾuȵ/g, '$1ْءٌ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾiȵ/g, '$1ْءٍ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾaȵ/g, '$1ْءًا');
 
 
     // short, hamza, tanwin
-    text = text.replace('uʾuȵ', "ُؤٌ");
-    text = text.replace('uʾiȵ', "ُؤٍ");
-    text = text.replace('uʾaȵ', "ُؤًا");
+    text = text.replace(/uʾuȵ/g, "ُؤٌ");
+    text = text.replace(/uʾiȵ/g, "ُؤٍ");
+    text = text.replace(/uʾaȵ/g, "ُؤًا");
 
-    text = text.replace('iʾuȵ', "ِئٌ");
-    text = text.replace('iʾiȵ', "ِئٍ");
-    text = text.replace('iʾaȵ', "ِئًا");
+    text = text.replace(/iʾuȵ/g, "ِئٌ");
+    text = text.replace(/iʾiȵ/g, "ِئٍ");
+    text = text.replace(/iʾaȵ/g, "ِئًا");
 
-    text = text.replace('aʾuȵ', "َأٌ");
-    text = text.replace('aʾiȵ', "َأٍ");
-    text = text.replace('aʾaȵ', "َأً");
+    text = text.replace(/aʾuȵ/g, "َأٌ");
+    text = text.replace(/aʾiȵ/g, "َأٍ");
+    text = text.replace(/aʾaȵ/g, "َأً");
 
     // long, hamza, tanwin
-    text = text.replace('ūʾuȵ', "وءٌ");
-    text = text.replace('ūʾiȵ', "وءٍ");
-    text = text.replace('ūʾaȵ', "وءً");
+    text = text.replace(/ūʾuȵ/g, "وءٌ");
+    text = text.replace(/ūʾiȵ/g, "وءٍ");
+    text = text.replace(/ūʾaȵ/g, "وءً");
 
-    text = text.replace('īʾuȵ', "يءٌ");
-    text = text.replace('īʾiȵ', "يءٍ");
-    text = text.replace('īʾaȵ', "يءً");
+    text = text.replace(/īʾuȵ/g, "يءٌ");
+    text = text.replace(/īʾiȵ/g, "يءٍ");
+    text = text.replace(/īʾaȵ/g, "يءً");
 
-    text = text.replace('āʾuȵ', "اءٌ");
-    text = text.replace('āʾiȵ', "اءٍ");
-    text = text.replace('āʾaȵ', "اءً");
+    text = text.replace(/āʾuȵ/g, "اءٌ");
+    text = text.replace(/āʾiȵ/g, "اءٍ");
+    text = text.replace(/āʾaȵ/g, "اءً");
 
     // long, hamza, diptote
     text = text.replace(/āʾu(?:(?=[\s.,!?])|$)/g, "اءُ");
@@ -246,58 +246,56 @@ function betacodeToArabic(text) {
     text = text.replace(/āʾa(?:(?=[\s.,!?])|$)/g, "اءَ");
 
     // medial HAMZAs
-    text = text.replace("aʾū", "َؤُو");
-    text = text.replace("uʾa", "ُؤَ");
-    text = text.replace("uʾi", "ُئِ");
+    text = text.replace(/aʾū/g, "َؤُو");
+    text = text.replace(/uʾa/g, "ُؤَ");
+    text = text.replace(/uʾi/g, "ُئِ");
 
-    text = text.replace("ūʾu", "ُوؤُ");
-    text = text.replace("ūʾi", "ُوئِ");
-    text = text.replace("awʾa", "َوْءَ");
-    text = text.replace("awʾu", "َوْءُ");
+    text = text.replace(/ūʾu/g, "ُوؤُ");
+    text = text.replace(/ūʾi/g, "ُوئِ");
+    text = text.replace(/awʾa/g, "َوْءَ");
+    text = text.replace(/awʾu/g, "َوْءُ");
 
-    text = text.replace("āʾi", "ائِ");
-    text = text.replace("aʾī", "َئِي");
-    text = text.replace("āʾī", "ائِي");
-    text = text.replace("āʾu", "اؤُ");
-    text = text.replace("uʾā", "ُؤَا");
+    text = text.replace(/āʾi/g, "ائِ");
+    text = text.replace(/aʾī/g, "َئِي");
+    text = text.replace(/āʾī/g, "ائِي");
+    text = text.replace(/āʾu/g, "اؤُ");
+    text = text.replace(/uʾā/g, "ُؤَا");
 
-    text = text.replace("aʾa", "َأَ");
-    text = text.replace("aʾi", "َئِ");
-    text = text.replace("aʾu", "َؤُ");
+    text = text.replace(/aʾa/g, "َأَ");
+    text = text.replace(/aʾi/g, "َئِ");
+    text = text.replace(/aʾu/g, "َؤُ");
 
-    text = text.replace("iʾu", "ِئُ");
-    text = text.replace("iʾi", "ِئِ");
-    text = text.replace("iʾa", "ِئَ");
-    text = text.replace("īʾa", "ِيئَ");
-    text = text.replace("īʾu", "ِيؤُ");
-    text = text.replace("iʾā", "ِئَا");
+    text = text.replace(/iʾu/g, "ِئُ");
+    text = text.replace(/iʾi/g, "ِئِ");
+    text = text.replace(/iʾa/g, "ِئَ");
+    text = text.replace(/īʾa/g, "ِيئَ");
+    text = text.replace(/īʾu/g, "ِيؤُ");
+    text = text.replace(/iʾā/g, "ِئَا");
 
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾa/g, '$1ْأَ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾu/g, '$1ْؤُ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾū/g, '$1ْؤُ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾi/g, '$1ْءٍ');
 
-    text = text.replace("uʾu", "ُؤُ");
-    text = text.replace("uʾū", "ُؤُو");
+    text = text.replace(/uʾu/g, "ُؤُ");
+    text = text.replace(/uʾū/g, "ُؤُو");
 
-    text = text.replace("aʾʾā", "َأَّا"); // geminnated hamza // dagger alif "َأّٰ", ordinary alif ""
-    text = text.replace("aʾī", "َئِي");
-    text = text.replace("āʾī", "ائِي");
-    text = text.replace("uʾā", "ُؤَا");
+    text = text.replace(/aʾʾā/g, "َأَّا"); // geminnated hamza // dagger alif "َأّٰ", ordinary alif ""
+    text = text.replace(/aʾī/g, "َئِي");
+    text = text.replace(/āʾī/g, "ائِي");
+    text = text.replace(/uʾā/g, "ُؤَا");
 
     text = text.replace(/uʾ([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])/g, 'ُؤْ$1');
     text = text.replace(/iʾ([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])/g, 'ِئْ$1');
     text = text.replace(/aʾ([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])/g, 'َأْ$1');
 
-    text = text.replace("aʾā", "َآ"); // madda: hamza, long a
+    text = text.replace(/aʾā/g, "َآ"); // madda: hamza, long a
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾā/g, '$1ْآ'); // madda: sukun, hamza, long a
 
     // pronominal suffixes
     //text = text.replace("-(h[ui]|hā|k[ai]|h[ui]mā?|kumā|h[ui]nna|)\b", r"\1");
-    console.log(1+text);
     // consonant combinations
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])\1/g, '$1ّ');
-    console.log(2+text);
     // two consonants into C-sukun-C
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])/g, '$1ْ$2');
     //text = text.replace("([%s])([%s])" % (cnsnnts,cnsnnts), r"\1%s\2" % " ْ ".trim());
@@ -310,16 +308,14 @@ function betacodeToArabic(text) {
 
     // tanwins
     text = text.replace(/([btṯǧḥḥḫdḏrzsšṣḍṭẓʿġfḳklmnhwy])aȵ/g, '$1اً');
-    text = text.replace('aȵ' , ' ً '.trim());
-    text = text.replace('uȵ' , ' ٌ '.trim());
-    text = text.replace('iȵ' , ' ٍ '.trim());
+    text = text.replace(/aȵ/g, ' ً '.trim());
+    text = text.replace(/uȵ/g, ' ٌ '.trim());
+    text = text.replace(/iȵ/g, ' ٍ '.trim());
 
     // silent letters
-    text = text.replace('ů' , "و");
-    text = text.replace('å' , "ا");
-    console.log(3+text);
+    text = text.replace(/ů/g, "و");
+    text = text.replace(/å/g, "ا");
     text = dictReplace(text, translitArabic);
     text = text.replace(/ْ(?:(?=[\s.,!?])|$)/g, ""); // replace final sukun
-    console.log(4+text);
     return text;
 }
