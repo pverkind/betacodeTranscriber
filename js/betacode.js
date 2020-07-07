@@ -136,19 +136,29 @@ var translitArabic = {
 }
 
 
+
 function dictReplace(text, d) {
     for (var [k,v] of Object.entries(d)) {
       k = k.trim();
       v = v.trim();
-      console.log(k+">"+v);
-      text = text.replace(k,v);
-      console.log(text);
-      console.log(k.toUpperCase()+">"+v.toUpperCase());
-      text = text.replace(k.toUpperCase(), v.toUpperCase());
-      console.log(text);
+      //console.log(k+">"+v);
+      //text = text.replace(k,v); // replaces only the first occurrence
+      //kr = new RegExp(k, "g");
+      //text = text.replace(kr,v); // does not work with k values starting with *
+      text = text.split(k).join(v);
+      //console.log(text);
+      //console.log(k.toUpperCase()+">"+v.toUpperCase());
+      //text = text.replace(k.toUpperCase(), v.toUpperCase()); // replaces only the first occurrence
+      //kr = new RegExp(k.toUpperCase(), "g");
+      //text = text.replace(kr, v.toUpperCase()); // does not work with k values starting with *
+      text = text.split(k.toUpperCase()).join(v.toUpperCase());
+      //console.log(text);
       if (k.length > 1) {
         k = k[0].toUpperCase()+k.slice(1,);
-        text = text.replace(k,v);
+        //text = text.replace(k,v) // replaces only the first occurrence
+        //kr = new RegExp(k, "g");
+        //text = text.replace(kr,v); // does not work with k values starting with *
+        text = text.split(k).join(v);
       }
 
       //console.log(text);
