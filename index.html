@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    #arab {
+      font-size:30pt;
+    }
+    input {
+      width: 400px;
+    }
+    button {
+      width: 120px;
+    }
+    td {
+      width: 70px;
+      margin: 3px;
+    }
+    td:nth-of-type(even) {
+      background:rgba(255,255,136,0.5);
+    }
+    td:nth-of-type(1) {
+      width: 140px;
+    }
+  </style>
+<body>
+
+<h3>Write the transcription in the input field and convert:</h3>
+
+
+<p>
+  Betacode transcription:
+</p>
+<input type="text" id="beta" name="beta">
+<button type="button" id="trnscr_btn" onclick="transliterate()">
+  Transliterate
+</button>
+
+<p>
+  Transliteration:
+</p>
+<!-- <span id="translit"></span> -->
+<input type="text" id="translit" name="translit">
+<button type="button" id="trnscr_btn" onclick="copyToClipboard()">
+  Copy to clipboard
+</button>
+
+
+
+<p>
+  Arabic (buggy, to be fixed):
+</p>
+<span id="arab"></span>
+
+<script language="JavaScript" src="js/betacode.js"></script>
+
+<h3>Conversion table:</h3>
+
+<table>
+<tbody>
+<tr>
+<td width="83">
+<p>main</p>
+</td>
+<td width="86">
+<p>_a ; ā</p>
+</td>
+<td width="79">
+<p>ا</p>
+</td>
+<td width="80">
+<p>z</p>
+</td>
+<td width="80">
+<p>ز</p>
+</td>
+<td width="80">
+<p>*k ; ḳ ; q</p>
+</td>
+<td width="79">
+<p>ق</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>b</p>
+</td>
+<td width="79">
+<p>ب</p>
+</td>
+<td width="80">
+<p>s</p>
+</td>
+<td width="80">
+<p>س</p>
+</td>
+<td width="80">
+<p>k</p>
+</td>
+<td width="79">
+<p>ك</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>t</p>
+</td>
+<td width="79">
+<p>ت</p>
+</td>
+<td width="80">
+<p>^s ; &scaron;</p>
+</td>
+<td width="80">
+<p>ش</p>
+</td>
+<td width="80">
+<p>l</p>
+</td>
+<td width="79">
+<p>ل</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>_t ; ṯ</p>
+</td>
+<td width="79">
+<p>ث</p>
+</td>
+<td width="80">
+<p>*s ; ṣ</p>
+</td>
+<td width="80">
+<p>ص</p>
+</td>
+<td width="80">
+<p>m</p>
+</td>
+<td width="79">
+<p>م</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>j ; ^g ; ǧ</p>
+</td>
+<td width="79">
+<p>ج</p>
+</td>
+<td width="80">
+<p>*d ; ḍ</p>
+</td>
+<td width="80">
+<p>ض</p>
+</td>
+<td width="80">
+<p>n</p>
+</td>
+<td width="79">
+<p>ن</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>*h ; ḥ</p>
+</td>
+<td width="79">
+<p>ح</p>
+</td>
+<td width="80">
+<p>*t ; ṭ</p>
+</td>
+<td width="80">
+<p>ط</p>
+</td>
+<td width="80">
+<p>h</p>
+</td>
+<td width="79">
+<p>ه</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>_h ; ḫ</p>
+</td>
+<td width="79">
+<p>خ</p>
+</td>
+<td width="80">
+<p>*z ; ẓ</p>
+</td>
+<td width="80">
+<p>ظ</p>
+</td>
+<td width="80">
+<p>w</p>
+</td>
+<td width="79">
+<p>و</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>d</p>
+</td>
+<td width="79">
+<p>د</p>
+</td>
+<td width="80">
+<p>` ; ʿ</p>
+</td>
+<td width="80">
+<p>ع</p>
+</td>
+<td width="80">
+<p>_u ; ū</p>
+</td>
+<td width="79">
+<p>و</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>_d ; ḏ</p>
+</td>
+<td width="79">
+<p>ذ</p>
+</td>
+<td width="80">
+<p>*g ; ġ</p>
+</td>
+<td width="80">
+<p>غ</p>
+</td>
+<td width="80">
+<p>y ; y</p>
+</td>
+<td width="79">
+<p>ي</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>&nbsp;</p>
+</td>
+<td width="86">
+<p>r</p>
+</td>
+<td width="79">
+<p>ر</p>
+</td>
+<td width="80">
+<p>f</p>
+</td>
+<td width="80">
+<p>ف</p>
+</td>
+<td width="80">
+<p>_i ; ī</p>
+</td>
+<td width="79">
+<p>ي</p>
+</td>
+</tr>
+<!--
+<tr>
+<td width="83">
+<p>Persian</p>
+</td>
+<td width="86">
+<p>^c ; č</p>
+</td>
+<td width="79">
+<p>چ</p>
+</td>
+<td width="80">
+<p>g</p>
+</td>
+<td width="80">
+<p>گ</p>
+</td>
+<td width="80">
+<p>p</p>
+</td>
+<td width="79">
+<p>پ</p>
+</td>
+</tr>
+-->
+<tr>
+<td width="83">
+<p>Non-alphabetic</p>
+</td>
+<td width="86">
+<p>' ; ʾ</p>
+</td>
+<td width="79">
+<p>ئ ; ء ; ؤ</p>
+</td>
+<td width="80">
+<p>/a ; &aacute;</p>
+</td>
+<td width="80">
+<p>ى</p>
+</td>
+<td width="80">
+<p>=t ; ŧ</p>
+</td>
+<td width="79">
+<p>ة</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>Vowels</p>
+</td>
+<td width="86">
+<p>u</p>
+</td>
+<td width="79">
+<p>ُ</p>
+</td>
+<td width="80">
+<p>i</p>
+</td>
+<td width="80">
+<p>ِ</p>
+</td>
+<td width="80">
+<p>a</p>
+</td>
+<td width="79">
+<p>َ</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>(at word ending)</p>
+</td>
+<td width="86">
+<p>?u ; ủ</p>
+</td>
+<td width="79">
+<p>ُ</p>
+</td>
+<td width="80">
+<p>?i ; ỉ</p>
+</td>
+<td width="80">
+<p>ِ</p>
+</td>
+<td width="80">
+<p>?a ; ả</p>
+</td>
+<td width="79">
+<p>َ</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>(with nunation)</p>
+</td>
+<td width="86">
+<p>?u*n ; ủȵ</p>
+</td>
+<td width="79">
+<p>ٌ</p>
+</td>
+<td width="80">
+<p>?i*n ; ỉȵ</p>
+</td>
+<td width="80">
+<p>ٍ</p>
+</td>
+<td width="80">
+<p>?a*n ; ảȵ</p>
+</td>
+<td width="79">
+<p>ً</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>Dagger alif</p>
+</td>
+<td width="86">
+<p>&nbsp;</p>
+</td>
+<td width="79">
+<p>&nbsp;</p>
+</td>
+<td width="80">
+<p>&nbsp;</p>
+</td>
+<td width="80">
+<p>&nbsp;</p>
+</td>
+<td width="80">
+<p>~a ; &atilde;</p>
+</td>
+<td width="79">
+<p>ٰ</p>
+</td>
+</tr>
+<tr>
+<td width="83">
+<p>Silent vowels<br/>(e.g., عمرو, فعلوا)</p>
+</td>
+<td width="86">
+<p>*w ; ů</p>
+</td>
+<td width="79">
+<p>و</p>
+</td>
+<td width="80">
+<p>&nbsp;</p>
+</td>
+<td width="80">
+<p>&nbsp;</p>
+</td>
+<td width="80">
+<p>*a ; &aring;</p>
+</td>
+<td width="79">
+<p>ا</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
