@@ -1,14 +1,17 @@
 var beta = document.getElementById("beta");
 var translit = document.getElementById("translit");
 var arab = document.getElementById("arab");
-
+var ar_check = document.getElementById("ar_check");
 
 function transliterate() {
   var text = beta.value;
-  console.log(text);
-  var ar = betacodeToArabic(text);
-  console.log('ar: '+ar);
-  arab.textContent = ar;
+  //console.log(text);
+
+  if (ar_check.checked == true) {
+    var ar = betacodeToArabic(text);
+    console.log('ar: '+ar);
+    arab.textContent = ar;
+  }
   var tr = betacodeToTranslit(text);
   console.log("tr: "+tr);
   //translit.textContent = tr;
@@ -21,6 +24,12 @@ beta.addEventListener("keydown", function(event) {
         transliterate();
     }
 });
+
+ar_check.addEventListener("change", function(event) {
+  if (this.checked) {
+    transliterate();
+  }
+})
 
 function copyToClipboard () {
   translit.select();

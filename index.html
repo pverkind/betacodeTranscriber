@@ -10,6 +10,17 @@
     button {
       width: 120px;
     }
+    #ara_div {
+      padding-top: 20px;
+    }
+    #ara_div input {
+      margin: 0px 0px 0px 0px;
+      padding: 0px;
+      width: 10px;
+    }
+    #ara_div label {
+      margin: 0px 0px 0px 3px;;
+    }
     td {
       width: 70px;
       margin: 3px;
@@ -25,31 +36,34 @@
 
 <h3>Write the transcription in the input field and convert:</h3>
 
+<div>
+  <p>
+    Betacode transcription:
+  </p>
+  <input type="text" id="beta" name="beta">
+  <button type="button" id="trnscr_btn" onclick="transliterate()">
+    Transliterate
+  </button>
+</div>
+<div>
+  <p>
+    Transliteration:
+  </p>
+  <!-- <span id="translit"></span> -->
+  <input type="text" id="translit" name="translit">
+  <button type="button" id="trnscr_btn" onclick="copyToClipboard()">
+    Copy to clipboard
+  </button>
+</div>
 
-<p>
-  Betacode transcription:
-</p>
-<input type="text" id="beta" name="beta">
-<button type="button" id="trnscr_btn" onclick="transliterate()">
-  Transliterate
-</button>
-
-<p>
-  Transliteration:
-</p>
-<!-- <span id="translit"></span> -->
-<input type="text" id="translit" name="translit">
-<button type="button" id="trnscr_btn" onclick="copyToClipboard()">
-  Copy to clipboard
-</button>
+<div id="ara_div">
+  <input type="checkbox" id="ar_check" name="ar_check">
+  <label for="ar_check">Convert to Arabic (does not work on Safari and Firefox)</label>
 
 
-
-<p>
-  Arabic:
-</p>
-<span id="arab"></span>
-
+  <br/>
+  <span id="arab"></span>
+</div>
 <script language="JavaScript" src="js/betacode.js"></script>
 
 <h3>Conversion table:</h3>
