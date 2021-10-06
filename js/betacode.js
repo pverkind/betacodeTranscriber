@@ -184,6 +184,12 @@ function betacodeToArabic(text) {
     var cnsnnts = "btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy";
     var cnsnnts = cnsnnts + cnsnnts.toUpperCase();
 
+    // deal with shadda:
+    shadda = "  ّ  ".trim();
+    text = text.replace(/(\w)\1/g, "$1"+shadda);
+
+    // convert text:
+
     text = dictReplace(text, betacodeTranslit);
     text = text.replace(/\+/g, "");
 
