@@ -200,8 +200,10 @@ function betacodeToArabic(text) {
     text = text.replace(/ả/g, "a");
 
     // complex combinations
-    text = text.replace(/all[āã]h/g, "الله".trim()); // Convert God's Name
-    text = text.replace(/li-?ll[āã]hi?/g, "لله".trim()); // Convert God's Name
+    text = text.replace(/all[āã]h[ua]?/g, "الله".trim()); // Convert God's Name
+    text = text.replace(/li-?ll[āã]hi?/g, " لِـلّٰـهِ ".trim()); // Convert God's Name
+    text = text.replace(/bi-?ll[āã]hi?/g, "بِاللهِ".trim()); // Convert God's Name
+    text = text.replace(/wa-?ll[āã]hi?/g, "وَاللهِ".trim()); // Convert God's Name
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)b\./g, "بن"); // Convert b. into ar bn
 
     //var sun = "([tṯdḏrzsšṣḍṭẓln])";
@@ -212,15 +214,19 @@ function betacodeToArabic(text) {
 
     // initial HAMZAs
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?a/g, "أَ");
-    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?i/g, "إِ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾi/g, "إِ");
+    text = text.replace(/(?:(?<=[\s.,!?:\-])|^)i/g, "ﭐ");
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?u/g, "أُ");
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ā/g, "آ");
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ī/g, "إِي");
     text = text.replace(/(?:(?<=[\s.,!?:\-])|^)ʾ?ū/g, "أُو");
 
-    text = text.replace(/-|_/g, "");
 
     // final HAMZAs
+  
+    text = text.replace(/aʾ(?:(?=[\s.,!?:])|$)/g, "أ")
+    text = text.replace(/uʾ(?:(?=[\s.,!?:])|$)/g, "ؤ")
+    text = text.replace(/iʾ(?:(?=[\s.,!?:])|$)/g, "ئ")  
     text = text.replace(/yʾaȵ/g, "يْئًا");
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾuȵ/g, '$1ْءٌ');
     text = text.replace(/([btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy])ʾiȵ/g, '$1ْءٍ');
@@ -332,6 +338,7 @@ function betacodeToArabic(text) {
 
     text = text.replace(/ْ(?:(?=[\s.,!?:])|$)/g, ""); // replace final sukun
     text = text.replace(/,/g, "،"); // Convert commas
+    text = text.replace(/-|_|ـ/g, "")
 
 
     return text;
