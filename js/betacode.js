@@ -13,6 +13,7 @@ function transliterate() {
     arab.textContent = ar;
   }
   var tr = betacodeToTranslit(text);
+  tr = convertDate(tr);
   console.log("tr: "+tr);
   //translit.textContent = tr;
   translit.value = tr;
@@ -44,8 +45,8 @@ var betacodeTranslit = {
     'b'  : 'b', // bā’
     't'  : 't', // tā’
     '_t' : 'ṯ', // thā’
-    '^g' : 'ǧ', // jīm
-    'j'  : 'ǧ', // jīm
+    // '^g' : 'ǧ', // jīm
+    // 'j'  : 'ǧ', // jīm
     '^c' : 'č', // chīm / Persian
     '*h' : 'ḥ', // ḥā’
     '_h' : 'ḫ', // khā’
@@ -340,6 +341,36 @@ function betacodeToArabic(text) {
     text = text.replace(/,/g, "،"); // Convert commas
     text = text.replace(/-|_|ـ/g, "")
 
+
+    return text;
+}
+
+
+function AHCE(dateAH) {
+    let data = dateAH - dateAH / 33 + 622;
+    return Math.round(data).toString();
+}
+
+
+function CEAH(dateCE) {
+    let data = (33 / 32) * (dateCE - 622);
+    return Math.round(data).toString();
+}
+
+
+function convertDate(text) {
+    const cePattern = /(?<!\d\/)(\d{1,4})CE(?!\/\d)/g;
+    const ahPattern = /(\d{1,4})AH(?!\/\d)/g;
+
+    text = text.replace(cePattern, (match, ceYear) => {
+        const ahYear = CEAH(parseInt(ceYear, 10));
+        return `${ahYear}AH/${ceYear}CE`;
+    });
+
+    text = text.replace(ahPattern, (match, ahYear) => {
+        const ceYear = AHCE(parseInt(ahYear, 10));
+        return `${ahYear}/${ceYear}`;
+    });
 
     return text;
 }
