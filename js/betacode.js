@@ -7,13 +7,14 @@ function transliterate() {
   var text = beta.value;
   //console.log(text);
 
+  text = convertDate(text);
+
   if (ar_check.checked == true) {
     var ar = betacodeToArabic(text);
     console.log('ar: '+ar);
     arab.textContent = ar;
   }
   var tr = betacodeToTranslit(text);
-  tr = convertDate(tr);
   console.log("tr: "+tr);
   //translit.textContent = tr;
   translit.value = tr;
@@ -364,7 +365,7 @@ function convertDate(text) {
 
     text = text.replace(cePattern, (match, ceYear) => {
         const ahYear = CEAH(parseInt(ceYear, 10));
-        return `${ahYear}AH/${ceYear}CE`;
+        return `${ahYear}/${ceYear}`;
     });
 
     text = text.replace(ahPattern, (match, ahYear) => {
