@@ -5,18 +5,20 @@ var ar_check = document.getElementById("ar_check");
 
 function transliterate() {
   var text = beta.value;
-  //console.log(text);
+  
+  console.log("Before Date Conversion: " + text);  //FIXME
 
   text = convertDate(text);
 
+  console.log("After Date Conversion: " + text);  //FIXME
+
   if (ar_check.checked == true) {
     var ar = betacodeToArabic(text);
-    console.log('ar: '+ar);
+    console.log('Converted to Arabic: ' + ar);  //FIXME
     arab.textContent = ar;
   }
   var tr = betacodeToTranslit(text);
-  console.log("tr: "+tr);
-  //translit.textContent = tr;
+  console.log('After transliteration: '+ tr);  //FIXME
   translit.value = tr;
 }
 
@@ -98,7 +100,8 @@ var translitArabic = {
     'b' : ' ب ',  // bāʾ
     't' : ' ت ',  // tāʾ
     'ṯ' : ' ث ', // thāʾ
-    'ǧ' : ' ج ',  // jīm
+    // 'ǧ' : ' ج ',  // jīm
+    'j' : ' ج ',  // jīm
     'č' : ' چ ', // chīm / Persian
     'ḥ' : ' ح ',  // ḥāʾ
     'ḫ' : ' خ ', // khāʾ
@@ -182,13 +185,22 @@ function betacodeToTranslit(text) {
     return text
 }
 
+const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
+
+
 function betacodeToArabic(text) {
     var cnsnnts = "btṯǧčḥḥḫdḏrzsšṣḍṭẓʿġfḳkglmnhwy";
     var cnsnnts = cnsnnts + cnsnnts.toUpperCase();
 
+    // convert dates to Arabic
+    const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
+    const textArabicDigits = text.replace(/\d/g, (digit) => arabicDigits[digit]);
+    text =  textArabicDigits.replace(/(\d+)\s*\/\s*(\d+)/g, "$1 هـ / $2 م");
+
     // deal with shadda:
     shadda = "  ّ  ".trim();
-    text = text.replace(/(\w)\1/g, "$1"+shadda);
+    // it must match only letters (not numbers nor underscore)
+    text = text.replace(/([\p{L}])\1/gu, "$1" + shadda);
 
     // convert text:
 
