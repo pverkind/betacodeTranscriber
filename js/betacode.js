@@ -5,20 +5,15 @@ var ar_check = document.getElementById("ar_check");
 
 function transliterate() {
   var text = beta.value;
-  
-  console.log("Before Date Conversion: " + text);  //FIXME
 
   text = convertDate(text);
 
-  console.log("After Date Conversion: " + text);  //FIXME
-
   if (ar_check.checked == true) {
     var ar = betacodeToArabic(text);
-    console.log('Converted to Arabic: ' + ar);  //FIXME
     arab.textContent = ar;
   }
+  
   var tr = betacodeToTranslit(text);
-  console.log('After transliteration: '+ tr);  //FIXME
   translit.value = tr;
 }
 
